@@ -7,13 +7,13 @@
 include 'config.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = $_POST['name'];
-    $email = $_POST['email'];
-    $age = $_POST['age'];
+    $name = $_POST['name_employee'];
+    $nip = $_POST['nip_employee'];
+    $position = $_POST['position_employee'];
 
-    $sql = "INSERT INTO users (name, email, age) VALUES ('$name', '$email', '$age')";
+    $sql = "INSERT INTO users (name_employee, nip_employee, position_employee) VALUES ('$name', '$email', '$age')";
     
-    if ($conn->query($sql) === TRUE) {
+    if ($mysqli->query($sql) === TRUE) {
         echo "New record created successfully";
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;

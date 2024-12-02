@@ -10,30 +10,32 @@ include 'config.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id = $_POST['id'];
     $name = $_POST['name'];
-    $email = $_POST['email'];
-    $age = $_POST['age'];
+    $nip = $_POST['nip'];
+    $position = $_POST['position'];
 
-    $sql = "UPDATE users SET name='$name', email='$email', age='$age' WHERE id=$id";
+    $sql_query = "UPDATE tbl_employee SET name_employee='$name', nip_employee='$nip', position_employee='$position' WHERE id_employee=$id";
+    $result = mysqli_query($mysqli, $sql_query);
+	header("Location: read.php");
     
-    if ($conn->query($sql) === TRUE) {
-        echo "Record updated successfully";
-        header("Location: index.php");
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-    }
 }
 
 $id = $_GET['id'];
-$sql = "SELECT * FROM users WHERE id=$id";
-$result = $conn->query($sql);
-$row = $result->fetch_assoc();
+$sql_query = "SELECT * FROM tbl_employee WHERE id_employee=$id";
+$result = mysqli_query($mysqli, $sql_query);
+
+while($user_data = mysqli_fetch_array($result)) {
+	$id = $user_data['id_employee'];
+	$nama = $user_data['name_employee'];
+	$nip = $user_data['nip_employee'];
+	$position = $user_data['position_employee'];
+}
 ?>
 
-<form method="post" action="">
-    <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
-    Name: <input type="text" name="name" value="<?php echo $row['name']; ?>"><br>
-    Email: <input type="text" name="email" value="<?php echo $row['email']; ?>"><br>
-    Age: <input type="number" name="age" value="<?php echo $row['age']; ?>"><br>
+<form method="POST" action="">
+    <input type="hidden" name="id" value="<?php echo $id; ?>">
+    Nama: <input type="text" name="name" value="<?php echo $nama; ?>"><br>
+    NIP: <input type="number" name="nip" value="<?php echo $nip; ?>"><br>
+    Position: <input type="text" name="position" value="<?php echo $position; ?>"><br>
     <input type="submit" value="Update">
 </form>
 </body>

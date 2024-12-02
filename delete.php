@@ -9,17 +9,11 @@ include 'config.php';
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
-    $sql = "DELETE FROM users WHERE id=$id";
+    $sql_query = "DELETE FROM tbl_employee WHERE id_employee=$id";
 
-    if ($conn->query($sql) === TRUE) {
-        echo "Record deleted successfully";
-        header("Location: index.php");
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-    }
+    $result = mysqli_query($mysqli, $sql_query);
+	header("Location: read.php");
 }
-
-$conn->close();
 ?>
 </body>
 </HTML>

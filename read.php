@@ -6,37 +6,31 @@
 <?php
 include 'config.php';
 
-$sql = "SELECT * FROM users";
-$result = $conn->query($sql);
+$sql_query = "SELECT * FROM tbl_employee";
+$result = mysqli_query($mysqli, $sql_query);
 
 echo "<table border='1'>
 <tr>
 <th>ID</th>
 <th>Name</th>
-<th>Email</th>
-<th>Age</th>
+<th>NIP</th>
+<th>Position</th>
 <th>Actions</th>
 </tr>";
 
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
+while($user_data = mysqli_fetch_array($result)) {   
         echo "<tr>
-        <td>" . $row['id'] . "</td>
-        <td>" . $row['name'] . "</td>
-        <td>" . $row['email'] . "</td>
-        <td>" . $row['age'] . "</td>
+        <td>" . $user_data['id_employee'] . "</td>
+        <td>" . $user_data['name_employee'] . "</td>
+        <td>" . $user_data['nip_employee'] . "</td>
+        <td>" . $user_data['position_employee'] . "</td>
         <td>
-            <a href='edit.php?id=" . $row['id'] . "'>Edit</a> | 
-            <a href='delete.php?id=" . $row['id'] . "'>Delete</a>
+            <a href='update.php?id=" . $user_data['id_employee'] . "'>Edit</a> | 
+            <a href='delete.php?id=" . $user_data['id_employee'] . "'>Delete</a>
         </td>
         </tr>";
     }
     echo "</table>";
-} else {
-    echo "0 results";
-}
-
-$conn->close();
 ?>
 </body>
 </HTML>
