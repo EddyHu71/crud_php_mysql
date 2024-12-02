@@ -13,8 +13,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nip = $_POST['nip'];
     $position = $_POST['position'];
 
-    $sql_query = "UPDATE tbl_employee SET name_employee='$name', nip_employee='$nip', position_employee='$position' WHERE id_employee=$id";
-    $result = mysqli_query($mysqli, $sql_query);
+    $sql_query = "UPDATE tbl_employee SET name_employee='$name', nip_employee='$nip', position_employee='$position' WHERE id_employee='$id'";
+    mysqli_query($mysqli, $sql_query);
+	
 	header("Location: read.php");
     
 }

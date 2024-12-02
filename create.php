@@ -7,25 +7,21 @@
 include 'config.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = $_POST['name_employee'];
-    $nip = $_POST['nip_employee'];
-    $position = $_POST['position_employee'];
+    $name = $_POST['name'];
+    $nip = $_POST['nip'];
+    $position = $_POST['position'];
 
-    $sql = "INSERT INTO users (name_employee, nip_employee, position_employee) VALUES ('$name', '$email', '$age')";
-    
-    if ($mysqli->query($sql) === TRUE) {
-        echo "New record created successfully";
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-    }
+    $sql_query = "INSERT INTO tbl_employee (name_employee, nip_employee, position_employee, status, date_join, date_created) VALUES ('$name', '$nip', '$position', 'Y', NOW(), NOW())";
+    mysqli_query($mysqli, $sql_query);
+	header("Location: read.php");
 }
 
 ?>
 
-<form method="post" action="">
+<form method="POST" action="">
     Name: <input type="text" name="name"><br>
-    Email: <input type="text" name="email"><br>
-    Age: <input type="number" name="age"><br>
+    NIP: <input type="text" name="nip"><br>
+    Position: <input type="number" name="position"><br>
     <input type="submit" value="Submit">
 </form>
 </body>

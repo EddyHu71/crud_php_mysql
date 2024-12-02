@@ -11,8 +11,13 @@ if (isset($_GET['id'])) {
 
     $sql_query = "DELETE FROM tbl_employee WHERE id_employee=$id";
 
-    $result = mysqli_query($mysqli, $sql_query);
-	header("Location: read.php");
+	mysqli_query($mysqli, $sql_query);
+	
+	if ($result) {
+		header("Location: read.php");
+	} else {
+		echo "Failed to delete";
+	}
 }
 ?>
 </body>
